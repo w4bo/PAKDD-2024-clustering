@@ -1,0 +1,63 @@
+
+\begin{theorem}\label{th:dist}
+The distance between any two points $p=(i,...,j,k)$ and $p'=(i', ...,j',k')$ in $z$ dimensions is always lower or equal to the distance of the two points in $z+1$ dimensions.
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+    &d^{z}(p,p') = d^z((i, ..., j), (i',...,j')) = \\
+    &d^{z+1}((i,...,j,0), (i',...,j',0)) \le d^{z+1}((i,...,j,k), (i',...,j',k'))
+\end{align*}
+\eop
+\end{proof}
+
+\begin{theorem}
+Given a number of clusters $n$ and a number of features (i.e., dimensions) $z$, the silhouette of a clustering in $z + 1$ dimensions is lower than or equal to the silhouette of at a least clustering in $z$ dimensions.
+\end{theorem}
+
+\begin{proof}
+Given a number of dimensions $z$, a cluster $c$ and its farthest cluster $c'$, the silhouette of a point $sil(p)$ is defined as
+\begin{align*}
+d^z_{inter} &= \sum_{p' \in c} \frac{d(p, p')}{|c|}\\
+d^z_{intra} &= \sum_{p' \in c'} \frac{d(p, p')}{|c'|}\\
+m^z &= max(d^z_{inter}, d^z_{intra})\\
+sil^z(p) &= \frac{d^z_{inter} - d^z_{intra}}{m^z}\\
+sil^z(C) &=avg_{p \in c, c \in C }(sil(p))
+\end{align*}
+From theorem \Cref{th:dist}, it is 
+\begin{align*}
+d^z_{inter} &\leq d^{z+1}_{inter}\\
+d^z_{intra} &\leq d^{z+1}_{intra}\\
+m^z &\leq m^{z+1}
+\end{align*}
+By contradiction it should be $sil^z(C) \ge sil^{z+1}(C)$ and by deduction $sil^z(p) \ge sil^{z+1}(p)$.
+\begin{align*}
+&sil^z(p) \ge sil^{z+1}(p)\\
+&\frac{d^z_{inter} - d^z_{intra}}{m} \ge \frac{d^{z+1}_{inter} - d^{z+1}_{intra}}{m}\\
+&\frac{d^z_{inter} - d^z_{intra}}{m^z} \ge \frac{d^{z+1}_{inter} - d^{z+1}_{intra}}{m^{z+1}}\\
+&m^{z+1}(d^z_{inter} - d^z_{intra}) \ge m^z(d^{z+1}_{inter} - d^{z+1}_{intra})\\
+&m^{z+1}(d^z_{inter} - d^z_{intra}) - m^z(d^{z+1}_{inter} - d^{z+1}_{intra}) \ge 0\\
+\end{align*}
+
+Hence, it is necessary that
+\begin{align}
+&m^{z+1}d^z_{inter} - m^z d^{z+1}_{inter} \ge 0\\
+&-m^{z+1} d^z_{intra} + m^z d^{z+1}_{intra} \ge 0
+\end{align}
+
+As to (1)
+\begin{align*}
+&m^{z+1}d^z_{inter} - m^z d^{z+1}_{inter} \ge 0\\
+&d^z_{inter} \ge \frac{m^z}{m^{z+1}} d^{z+1}_{inter}\\
+\end{align*}
+But this is could be possible only if $m^{z+1} = d^{z+1}_{intra}$; i.e., only if the clusters are overlapping. Since k-means does not produce overlapping clusters, this condition is not satisfied for some points in the cluster (i.e., for points close to cluster boundaries, it is possible that $d^z_{intra} \ge d^_{extra}$).
+
+As to (2)
+\begin{align*}
+&-m^{z+1} d^z_{intra} + m^z d^{z+1}_{intra} \ge 0\\
+&d^{z+1}_{intra} \ge \frac{m^{z+1}}{m^z} d^z_{intra}\\
+&d^{z}_{intra} \le \frac{m^z}{m^{z+1}} d^{z + 1}_{intra}\\
+&\frac{d^{z}_{intra}}{d^{z + 1}_{intra}} \le \frac{m^z}{m^{z+1}}\\
+\end{align*}
+\eop
+\end{proof}

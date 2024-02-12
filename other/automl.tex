@@ -1,0 +1,21 @@
+
+After the ML pipeline is designed, its fine-tuning is time-consuming. 
+This optimization can be formalized as \textit{Combined Algorithm Selection and Hyper-parameters optimization} (CASH) \cite{thornton2013auto}.
+Although the problem has been interpreted to solve just the tuning of the modeling phase, it is rather high-level as it considers the whole machine learning pipeline selection and its configuration as part of the algorithm selection phase and the general hyper-parameter configuration.
+Formally, a dataset $\mathcal{D}$ is divided into two disjoint sets $\mathcal{D}_{train}$ and $\mathcal{D}_{valid}$ so that a set of algorithms $\mathcal{A} = \{A^1, \dots, A^m\}$, with associated hyper-parameter spaces $\Lambda^1, \dots, \Lambda^m$, can be trained on $\mathcal{D}_{train}$, and validated on $\mathcal{D}_{valid}$.
+The performance of each hyper-parameter configuration $A^{i}_{\lambda}$, for $A^{i} \in \mathcal{A}$ and $\lambda \in \Lambda^{i}$, is evaluated via a qualitative metric $\mathcal{M}(A^{i}_{\lambda}, \mathcal{D}_{train}, \mathcal{D}_{valid})$.
+Since our goal is exploring promising clusterings, we leverage the silhouette coefficient as the metric to be optimized by CASH while finding the most performing configuration $A^{\ast}_{\lambda^{\ast}}$:
+\begin{align*}
+    A^{\ast}_{\lambda^{\ast}} = \argmax_{A^{i} \in \mathcal{A}, \lambda \in \Lambda^{i}} \mathcal{M}(A^{i}_{\lambda}, \mathcal{D}_{train}, \mathcal{D}_{valid})
+\end{align*}
+
+The optimization of an entire ML pipeline \cite{thornton2013auto,quemy2019data} is more complex than the optimization of the single modeling step \cite{hutter2011sequential}, this is due to the huge number of pipelines that result from picking pre-processing transformations in different orders as well as from the combination of the hyper-parameters of each task (with a combinatorial complexity in case or exhaustive search).
+
+The mitigation of such complexity has been addressed as follows.
+As to the order of pre-processing transformations, in \cite{DBLP:conf/dolap/GiovanelliBA21}, the authors reduce the combinations of pre-processing transformations to a few prototypes (i.e., sequences of transformations).
+As to the optimization of the pipeline, rather than exhaustive or grid searches, \textit{Sequential Model-Based Optimization} (SMBO) explores configurations as relevant as possible.
+%To optimize the exploration and to evaluate each configuration, SMBO requires a relevance metric according to the ML algorithm at hand.
+The relevance is determined according to the qualitative metric to maximize, and drives the whole exploration.
+Specifically, the process involves several iterations, through which the configurations are explored.
+As the iterations advance, an increasingly accurate model is built on top of the previous explored configurations, with the aim of suggesting---among the remaining---the most promising ones.
+The configurations keep being explored, updating the model, until a budget in terms of either iterations or time is reached.

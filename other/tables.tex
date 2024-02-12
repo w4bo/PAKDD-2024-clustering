@@ -1,0 +1,83 @@
+\begin{table*}[t]
+\begin{tabular}{@{}l|lccc|clccccccc|l@{}}
+\toprule
+\multirow{2}{*}{Reference} & \multicolumn{4}{c|}{Internal measures} & \multicolumn{9}{c|}{External measures} & \multirow{2}{*}{Notes} \\
+ & DBI & SSW & Sil. & SW & F-meas. & Mink. & Err.rate & AR & Prec. & Rec. & FM & Class.err. & Purity &  \\ \midrule
+\cite{dutta2013} & \checkmark &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\cite{hancer2020new} & \checkmark & \checkmark &  &  &  &  &  & \checkmark &  &  & \checkmark &  &  &  \\
+\cite{hatamlou2013black} &  & &  & \checkmark &  &  & \checkmark &  &  &  &  &  &  &  \\
+\cite{o2018particle} &  &  & \checkmark &  & \checkmark &  &  &  &  &  &  &  &  & No real dataset \\
+\cite{memetic} &  &  &  &  &  &  &  &  & \checkmark & \checkmark &  & \checkmark &  & No internal eval. \\
+\cite{lensen2017using} &  & \checkmark &  &  &  &  &  &  &  &  & \checkmark &  & \checkmark & Previous work of \cite{o2018particle} \\
+\cite{prakash2019gravitational} &  &  & \checkmark &  & \checkmark &  &  &  &  &  &  &  &  & Results based on F-Meas. \\
+\cite{simulate_annealing} &  &  &  &  &  & \checkmark &  &  &  &  &  &  &  & No internal eval. \\ \bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table}[t]
+    \scriptsize
+    \caption{Comparing the effectiveness and efficiency of heuristic vs optimal AutoClues.}
+    \label{tab:experiments}
+    \begin{tabular}{@{}l|ll|ll|ll@{}}
+        \toprule
+        \multirow{2}{*}{Dataset} & \multicolumn{2}{l|}{Optimization} & \multicolumn{2}{l|}{Diversification} & \multicolumn{2}{l}{Score} \\ 
+         & \multicolumn{1}{l|}{Type} & Time (s) & \multicolumn{1}{l|}{Type} & Time (s) & \multicolumn{1}{l|}{Abs.} & Norm. \\ \midrule
+         
+        \multirow{4}{*}{Synthetic} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{7.7e1}} & MMR & \num{1.0e0} & 5.40 & 0.99 \\ 
+         &  &  & Exhaust. & \num{3.1e1} & 5.40 & 0.99 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{2.7e2}} & MMR & \num{3.0e0} & 5.43 & 1.0 \\
+         &  &  & Exhaust. & \num{6.4e2} & 5.43 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Blood-\\transfusion\end{tabular}} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{3.5e1}} & MMR & \num{1.0e0} & 6.79 & 0.97 \\
+         &  &  & Exhaust. & \num{1.0e2} & 6.79 & 0.97 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{5.2e1}} & MMR & \num{2.0e0} & 6.93 & 1.0 \\
+         &  &  & Exhaust. & \num{4.1e3} & 6.93 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Breast-\\tissue\end{tabular}} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{3.6e1}} & MMR & \num{1.0e0} & 1.79 & 0.98 \\
+         &  &  & Exhaust. & \num{1.0e0} & 1.79 & 0.98 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{5.5e1}} & MMR & \num{1.0e0} & 1.81 & 1.0 \\
+         &  &  & Exhaust. & \num{9.0e0} & 1.81 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{Diabetes} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{4.5e1}} & MMR & \num{1.0e0} & 8.29 & 0.99 \\
+         &  &  & Exhaust. & \num{1.8e1} & 8.29 & 0.99 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{9.0e1}} & MMR & \num{1.0e0} & 8.3 & 1.0 \\
+         &  &  & Exhaust. & \num{5.5e2} & 8.3 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{Ecoli} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{3.7e1}} & MMR & \num{1.0e0} & 1.76 & 1.0 \\
+         &  &  & Exhaust. & \num{3.0e0} & 1.76 & 1.0 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{5.8e1}} & MMR & \num{1.0e0} & 1.76 & 1.0 \\
+         &  &  & Exhaust. & \num{2.5e1} & 1.76 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{Iris} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{3.2e1}} & MMR & \num{1.0e0} & 6.25 & 0.96 \\
+         &  &  & Exhaust. & \num{5.0e0} & 6.25 & 0.96 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{4.0e1}} & MMR & \num{1.0e0} & 6.46 & 1.0 \\
+         &  &  & Exhaust. & \num{1.3e2} & 6.46 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{Parkinsons} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{4.6e1}} & MMR & \num{2.0e0} & 13.02 & 0.98 \\
+         &  &  & Exhaust. & \num{1.3e4} & 13.24 & 1.0 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{1.0e2}} & MMR & \num{3.0e0} & 13.02 & 0.98 \\
+         &  &  & Exhaust. & \num{2.6e5} & 13.24 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{Seeds} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{3.6e1}} & MMR & \num{1.0e0} & 7.66 & 0.99 \\
+         &  &  & Exhaust. & \num{1.9e1} & 7.68 & 1.0 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{5.2e1}} & MMR & \num{1.0e0} & 7.66 & 0.99 \\
+         &  &  & Exhaust. & \num{8.0e2} & 7.68 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{Thyroid} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{3.9e1}} & MMR & \num{1.0e0} & 7.11 & 1.0 \\
+         &  &  & Exhaust. & \num{2.7e2} & 7.11 & 1.0 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{4.4e1}} & MMR & \num{1.0e0} & 7.11 & 1.0 \\
+         &  &  & Exhaust. & \num{4.8e2} & 7.11 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{Vehicle} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{7.3e1}} & MMR & \num{3.0e0} & 12.06 & 1.0 \\
+         &  &  & Exhaust. & \num{6.4e2} & 12.06 & 1.0 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{2.0e2}} & MMR & \num{2.0e0} & 12.06 & 1.0 \\
+         &  &  & Exhaust. & \num{1.3e4} & 12.06 & 1.0 \\ \midrule
+         
+        \multirow{4}{*}{Wine} & \multirow{2}{*}{SMBO} & \multirow{2}{*}{\num{4.0e1}} & MMR & \num{1.0e0} & 10.34 & 1.0 \\
+         &  &  & Exhaust. & \num{5.8e2} & 10.34 & 1.0 \\ \cline{2-7}
+         & \multirow{2}{*}{Exhaust.} & \multirow{2}{*}{\num{7.0e1}} & MMR & \num{4.0e0} & 10.34 & 1.0 \\
+         &  &  & Exhaust. & \num{9.6e4} & 10.34 & 1.0 \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+
