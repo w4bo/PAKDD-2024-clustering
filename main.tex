@@ -137,7 +137,7 @@ To overcome the previous limitations, we devise AutoClues: an \textit{end-to-end
     \item \textit{providing} a customizable generator of synthetic datasets for benchmarking in (crisp) cluster analysis.
 \end{itemize}
 
-To let the reader appreciate the novelty of AutoClues, we rely on a synthetic 10-dimensional (10D) dataset that includes 6 natural clusters. \Cref{fig:ca3} shows the t-SNE \cite{van2008visualizing} visualization\footnote{\textcolor{orange}{This dimensionality reduction visualizes high-dimensional clusterings in 2D, preserving distance proportions. We apply it with the default Scikit-learn hyperparameters.}}  of the clustering obtained applying AutoML4Clust \cite{Tschechlov2021}, an approach of the literature, that solely tunes the clustering step $Cl$. \Cref{fig:ca4,fig:ca5,fig:ca6} show the clusterings obtained by tuning an ML pipeline that incrementally includes feature selection ($FS$), normalization ($N$), and outlier removal ($OR$). In (b), $FS$ identifies the most relevant features; in (c), $N$ standardizes such features thus avoiding bias due to different domain ranges; in (d), $OR$ drops any data items that are not representative. 
+To let the reader appreciate the novelty of AutoClues, we rely on a synthetic 10-dimensional (10D) dataset that includes 6 natural clusters. \Cref{fig:ca3} shows the t-SNE \cite{van2008visualizing} visualization\footnote{This dimensionality reduction visualizes high-dimensional clusterings in 2D, preserving distance proportions. We apply it with the default Scikit-learn hyperparameters.}  of the clustering obtained applying AutoML4Clust \cite{Tschechlov2021}, an approach of the literature, that solely tunes the clustering step $Cl$. \Cref{fig:ca4,fig:ca5,fig:ca6} show the clusterings obtained by tuning an ML pipeline that incrementally includes feature selection ($FS$), normalization ($N$), and outlier removal ($OR$). In (b), $FS$ identifies the most relevant features; in (c), $N$ standardizes such features thus avoiding bias due to different domain ranges; in (d), $OR$ drops any data items that are not representative. 
 It is apparent how the tuning improves throughout the different steps, making it possible for $Cl$ to properly detect the 6 natural clusters. 
 To quantitatively understand the improvements, we rely on the silhouette index $sil \in [-1, 1]$ (the higher the better), an estimation of the ``goodness'' of a clustering considering solely the data itself; namely, the \textit{separability} between the clusters and their \textit{cohesion} \cite{zhu2010clustering}.
 While in real-case unsupervised problems the ground truth is not available, for our synthetic example we can also measure how the returned clusters match the synthetic ones through the adjusted mutual information \cite{vinh2009information} $AMI \in [0, 1]$ (the higher the better).
@@ -185,7 +185,7 @@ Although the active development of data pre-processing techniques in cluster ana
 Former approaches employed model-free techniques (i.e., without a model to drive the optimization) to tune the combination of number of clusters and number of features.
 Evolutionary algorithms are population-based heuristics inspired by biological evolution mechanisms (e.g., reproduction, mutation) or physical phenomena (e.g., particle swarm, black holes).
 The population is intended as the search space, individuals are configurations, and a mutation mechanism allows the modification of the current candidate, hence the exploration.
-Recent works that follow this modus operandi (i.e., MOGA \cite{dutta2013}, MODE-cf \cite{hancer2020new}, \textcolor{orange}{TPE-AutoClust \cite{10031132}}) compose the candidate with a string that encodes information about both the feature selection and the clustering.
+Recent works that follow this modus operandi (i.e., MOGA \cite{dutta2013}, MODE-cf \cite{hancer2020new}, TPE-AutoClust \cite{10031132}) compose the candidate with a string that encodes information about both the feature selection and the clustering.
 Authors in \cite{simulate_annealing} leverage simulated annealing, an algorithm that comes from a technique involving heating and controlled cooling of material in metallurgy.
 In \cite{prakash2019gravitational}, it is leveraged a gravitational search algorithm, inspired by the theory of Newtonian gravity.
 
@@ -193,7 +193,7 @@ Model-based techniques leverage past evaluations to fit a model and visit the mo
 Such techniques have been proven to achieve extremely good results, specifically in the (supervised) AutoML field where a pipeline has to be instantiated with different algorithms and hyperparameters.
 Authors in \cite{Tschechlov2021,poulakis2020autoclust,Liu2021} apply such techniques on cluster analysis, but do not consider any pre-processing phase.
 In MALSS \cite{Kamoshida2020}, the authors apply AutoML with simple (no-clustering-oriented) pre-processing, and still for the aim of suggesting the number of clusters.
-\textcolor{orange}{In \cite{ENES20231}, authors introduce a pipeline for unsupervised clustering, yet specifically tailored for multivariate time series originating from HPC job monitoring.}
+In \cite{ENES20231}, authors introduce a pipeline for unsupervised clustering, yet specifically tailored for multivariate time series originating from HPC job monitoring.
 Finally, such approaches retrieve just one solution.
 
 \section{AutoClues}\label{sec:autoclues}
@@ -303,8 +303,8 @@ Selecting the optimal pipeline instance requires the relevance metric (i.e., $re
 In AutoClues, such a metric is customizable.
 Well-known metrics leveraged for spherical clustering are: the silhouette index (SIL) \cite{zhu2010clustering}, contrasting the average distance to elements in the same cluster with the average distance to elements in other clusters, and the Davies-Bouldin Index (DBI) \cite{dbi}, computing the average similarity between clusters by considering their own size.
 However, clustering metrics show a bias toward lower dimensionalities i.e., yielding higher scores when fewer features are chosen \cite{lensen2017using,hancer2020new}. 
-\textcolor{orange}{To overcome this, we employ t-SNE \cite{van2008visualizing} (with default Scikit-learn hyperparameters) to project the clusterings to a latent 2D space.
-Distances in this latent space are preserved, and we can compute the chosen metric atop,  enabling a fair evaluation of clusterings across diverse feature spaces.}
+To overcome this, we employ t-SNE \cite{van2008visualizing} (with default Scikit-learn hyperparameters) to project the clusterings to a latent 2D space.
+Distances in this latent space are preserved, and we can compute the chosen metric atop,  enabling a fair evaluation of clusterings across diverse feature spaces.
 %
 % During the optimization, we also store the computed pipeline instances since our goal is returning diverse and relevant clusterings.
 \\
@@ -319,7 +319,7 @@ Since we need a diversity metric, we adapt the formula as in:
 $$div(C_i, C_j) = 1- AMI(C_i, C_j)$$ 
 where $C_i, C_j$ clusterings coming from different pipeline instances.
 
-Finally, considering that the diversification problem is NP-hard, we compute it by exploiting the MMR heuristic solution\footnote{\textcolor{orange}{We use the default hyperparameter $\beta = 0.5$, and set $\alpha$ according to the test at hand.}} \cite{vieira2011query} that selects the best-performing clustering and iteratively adds the clusterings that most diversify the outcome.
+Finally, considering that the diversification problem is NP-hard, we compute it by exploiting the MMR heuristic solution\footnote{We use the default hyperparameter $\beta = 0.5$, and set $\alpha$ according to the test at hand.} \cite{vieira2011query} that selects the best-performing clustering and iteratively adds the clusterings that most diversify the outcome.
 
 \section{Benchmark Generation and Empirical Evaluation}\label{sec:test}
 
@@ -394,7 +394,7 @@ For the optimization, we adopted the silhouette $SIL$ index as a relevance objec
 Tests are run on a single core of an Intel Core i7 machine at $3.20$ GHz and $64$ GB of main memory.
 %
 Given an AutoClues dashboard, \Cref{tbl:synthetic} provides
-the maximum $SIL\in [0, 1]$ as the cohesion of the found clusters and the maximum $AMI \in [0, 1]$ as the alignment with the natural ones\footnote{\textcolor{orange}{Metrics are computed on the original dataset (i.e., no t-SNE distortion)}}. Besides, we report the dashboard score of \Cref{def:score}, summarizing the overall relevance and diversity in the dashboard, and the diversification computation time.
+the maximum $SIL\in [0, 1]$ as the cohesion of the found clusters and the maximum $AMI \in [0, 1]$ as the alignment with the natural ones\footnote{Metrics are computed on the original dataset (i.e., no t-SNE distortion)}. Besides, we report the dashboard score of \Cref{def:score}, summarizing the overall relevance and diversity in the dashboard, and the diversification computation time.
 \\
 \\
 \textbf{Effectiveness}
