@@ -256,7 +256,7 @@ div(\hat{\mathcal{C}}) &= \sum_{C_i \in \hat{\mathcal{C}}}~\sum_{C_j \in (\hat{\
 \label{def:div}
 \end{align}
 
-\noindent $div(\hat{\mathcal{C}})$ is the sum of pairwise clustering diversity comparisons and $rel(\hat{\mathcal{C}})$ is the sum of clustering relevance;
+\noindent $div(\hat{\mathcal{C}})$ is the sum of pairwise clustering diversity comparisons and $rel(\hat{\mathcal{C}})$ is the sum of clustering relevances;
 $rel(\hat{\mathcal{C}})$ entails a multiplication factor $|\hat{\mathcal{C}}|-1$ to make $rel(\hat{\mathcal{C}})$ and $div(\hat{\mathcal{C}})$ comparable.
 
 \subsection{Implementation}\label{sec:implementation}
@@ -304,7 +304,7 @@ In AutoClues, such a metric is customizable.
 Well-known metrics leveraged for spherical clustering are: the silhouette index (SIL) \cite{zhu2010clustering}, contrasting the average distance to elements in the same cluster with the average distance to elements in other clusters, and the Davies-Bouldin Index (DBI) \cite{dbi}, computing the average similarity between clusters by considering their own size.
 However, clustering metrics show a bias toward lower dimensionalities i.e., yielding higher scores when fewer features are chosen \cite{lensen2017using,hancer2020new}. 
 To overcome this, we employ t-SNE \cite{van2008visualizing} (with default Scikit-learn hyperparameters) to project the clusterings to a latent 2D space.
-Distances in this latent space are preserved, and we can compute the chosen metric atop,  enabling a fair evaluation of clusterings across diverse feature spaces.
+Distances in this latent space are preserved, and we can compute the chosen metric atop, enabling a fair evaluation of clusterings across diverse feature spaces.
 %
 % During the optimization, we also store the computed pipeline instances since our goal is returning diverse and relevant clusterings.
 \\
@@ -331,7 +331,7 @@ Finally, considering that the diversification problem is NP-hard, we compute it 
     \hline
         \multirow{2}{*}{Dataset}& \multicolumn{7}{c|}{Characteristics} & \multicolumn{4}{c}{AutoClues Performance} \\
         & $|D|$ & $|\mathcal{F}|$ & $|\mathcal{C}|$ & $\sigma(D)$ & $\sigma(\mathcal{F})$ & $SIL_N$ & $SIL_B$ & $SIL$ & $AMI$ & Score & Div. time (s) \\ \hline
-         \texttt{syn1} & 2905 & 2  & 3 & 0.15  & 0.50  & 0.72 & 0.48 & 0.79 & 1.0 & 4.12 & \num{1.64e03} \\ 
+        \texttt{syn1} & 2905 & 2  & 3 & 0.15  & 0.50  & 0.72 & 0.48 & 0.79 & 1.0 & 4.12 & \num{1.64e03} \\ 
         \texttt{syn2} & 264 & 5  & 3 & 0.25  & 0.20  & 0.64 & 0.4 & 0.7 & 0.83 & 4.76 & \num{1.74e02} \\ 
         \texttt{syn3} & 900 & 7  & 12 & 0.11  & 0.14  & 0.88 & 0.6 & 0.92 & 1.0 & 4.39 & \num{1.51e03} \\ 
         \texttt{syn4} & 1446 & 2  & 13 & 0.22  & 1.00  & 0.59 & 0.31 & 0.85 & 0.95 & 3.92 & \num{2.99e03} \\ 
